@@ -244,7 +244,7 @@ wsServer.on('request', function(request) {
                 let jsonPacket = {
                     packetID : Packet.QuitGame,
                     data : {
-                        inGame : lobby.inGame
+                        quit : true
                     }
                 }
                 for( const p of lobby.players) {        //Notify all users of quit game
@@ -255,6 +255,7 @@ wsServer.on('request', function(request) {
                 for( const p of lobby.players) {        //Send lobby list update
                     sendLobbyList(p.connection)
                 }
+                break
             }
             default : {
                 console.log("Unknown Packet Received")
