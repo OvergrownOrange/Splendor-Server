@@ -17,7 +17,8 @@ enum Packet {
     LeaveLobby = 6,
     Message = 7,
     Ready = 8,
-    StartGame = 9
+    StartGame = 9,
+    QuitGame = 10
 }
 
 
@@ -226,14 +227,34 @@ wsServer.on('request', function(request) {
                 let jsonPacket = {
                     packetID : Packet.StartGame,
                     data : {
-                        inGame : true
+                        inGame : lobby.inGame
                         //TODO: attach game object
                     }
                 }
-                for( const player of lobby.players) {
-                    player.connection.send(JSON.stringify(jsonPacket))
+                for( const p of lobby.players) {
+                    p.connection.send(JSON.stringify(jsonPacket))
                 }
                 break
+            }
+            case Packet.QuitGame : {
+                const player = players.find(player => player.connection == connection)
+                if (!checkPlayer(player)) break
+                const lobby = player.lobby
+                lobby.inGame = false
+                let jsonPacket = {
+                    packetID : Packet.QuitGame,
+                    data : {
+                        inGame : lobby.inGame
+                    }
+                }
+                for( const p of lobby.players) {        //Notify all users of quit game
+                    p.connection.send(JSON.stringify(jsonPacket))
+                }
+                const index = lobbies.indexOf(lobby, 0) //Kill the lobby
+                if(index > -1) lobbies.splice(index, 1)
+                for( const p of lobby.players) {        //Send lobby list update
+                    sendLobbyList(p.connection)
+                }
             }
             default : {
                 console.log("Unknown Packet Received")
