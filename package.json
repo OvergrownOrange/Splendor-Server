@@ -1,0 +1,22 @@
+{
+  "name": "splendor.server",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {
+    "rxjs": "^6.5.3",
+    "websocket": "^1.0.30"
+  },
+  "devDependencies": {
+    "@types/node": "^12.11.1",
+    "@types/websocket": "0.0.40",
+    "ts-node-dev": "^1.0.0-pre.43",
+    "typescript": "^3.6.4"
+  },
+  "scripts": {
+    "start": "ts-node-dev ServerMain.ts"
+  },
+  "author": "",
+  "license": "ISC"
+}

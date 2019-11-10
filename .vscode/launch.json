@@ -1,0 +1,24 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch server debug",
+            "program": "${workspaceRoot}/node_modules/ts-node-dev/bin/ts-node-dev",
+            "args": [
+              "--inspect",
+              "--no-notify",
+              "--respawn",
+              "--transpileOnly",
+              "ServerMain.ts"
+            ],
+            "protocol": "inspector",
+            "internalConsoleOptions": "openOnSessionStart",
+            "port": 9229
+        },
+    ]
+}
