@@ -187,21 +187,6 @@ wsServer.on('request', function(request) {
                 const player = players.find(player => player.connection == connection)
                 if (!checkPlayer(player)) break 
                 leaveLobby(player)
-                // const lobby = player.lobby
-                // if(lobby != null || lobby.id != 0) {
-                //     lobby.RemovePlayer(player)      //Remove this player
-                //     if(lobby.playerCount == 0) {    //Remove this lobby if no players remain
-                //         const index = lobbies.indexOf(lobby, 0)
-                //         if(index > -1) lobbies.splice(index, 1)
-                //         for (const p of players) {          //Update all players looking that this lobby has closed
-                //             if(p.lobby.id == 0) sendLobbyList(p.connection) 
-                //         }
-                //     } else {
-                //         for (const p of lobby.players) {    //Update all players in lobby of change
-                //             sendLobby(lobby, p.connection)
-                //         }
-                //     }
-                // }
                 break
             }
             case Packet.Message : {
